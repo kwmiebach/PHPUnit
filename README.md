@@ -47,3 +47,24 @@ PHPUnit docker for Magento 2 code tests
     docker run --rm -v $PWD:/code domw/phpunit:7.3 phpunit --version
 
     docker run --rm -v $PWD:/code domw/phpunit:7.4 phpunit --version
+
+### Config file
+
+`phpunit.xml` for `v9.3`
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="false" backupStaticAttributes="false" bootstrap="vendor/autoload.php" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+    <testsuites>
+        <testsuite name="Brand Tests">
+            <directory suffix="Test.php">./tests/Brand</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="QUEUE_DRIVER" value="sync"/>
+    </php>
+</phpunit>
+```
