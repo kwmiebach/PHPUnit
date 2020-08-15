@@ -1,0 +1,6 @@
+version: "2"
+services:
+
+  phpunit:
+    image: domw/phpunit:7.3-cli
+    restart: 'always'
