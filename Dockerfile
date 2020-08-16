@@ -11,6 +11,13 @@ ENV PHP_CONF_DIR=/usr/local/etc/php/conf.d
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+RUN apk add --no-cache $PHPIZE_DEPS \
+    && pecl install xdebug-2.9.6 \
+    && docker-php-ext-enable xdebug \
+    && docker-php-ext-install pcntl \
+    && docker-php-ext-install exif \
+    && php -m
+
 RUN echo "memory_limit=-1" > $PHP_CONF_DIR/99_memory-limit.ini \
     && apk add git \
     && rm -rf /var/cache/apk/* /var/tmp/* /tmp/*
